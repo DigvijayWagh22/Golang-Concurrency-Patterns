@@ -6,6 +6,43 @@ import (
 	"slices"
 )
 
+func plus(a, b int) int {
+	return a + b
+
+}
+
+func plusplus(a, b, c int) int {
+	return a + b + c
+}
+
+func vals() (int, int) {
+	return 3, 7
+}
+
+func sum(nums ...int) {
+	fmt.Println(nums, " ")
+	total := 0
+	for _, num := range nums {
+		total += num
+	}
+	fmt.Println(total)
+}
+
+func closurefunc() func() int {
+	i := 0
+	return func() int {
+		i++
+		return i
+	}
+}
+
+func fact(n int) int {
+	if n == 0 {
+		return 1
+	}
+	return n * fact(n-1)
+}
+
 func main() {
 
 	// slices
@@ -95,5 +132,48 @@ func main() {
 	if maps.Equal(n1, n2) {
 		fmt.Println("n1 == n2")
 	}
+
+	// golang functions
+	ans1 := plus(1, 2)
+	ans2 := plusplus(1, 2, 3)
+	fmt.Println(ans1, " ", ans2)
+
+	// multiple return values
+	a, b := vals()
+	fmt.Println(a, " ", b)
+	fmt.Println(vals())
+
+	q, _ := vals()
+	fmt.Println(q)
+
+	// Variadic functions
+	sum(1, 2, 3)
+	sum(1, 2, 3, 4, 5)
+
+	// closures
+	closefuncvalue := closurefunc()
+	newclosefuncvalue := closurefunc()
+	fmt.Println(closefuncvalue())
+	fmt.Println(closefuncvalue())
+	fmt.Println(closefuncvalue())
+	fmt.Println(closefuncvalue())
+	fmt.Println(closefuncvalue())
+	fmt.Println(newclosefuncvalue())
+	fmt.Println(newclosefuncvalue())
+
+	// recursion
+
+	fmt.Println(fact(7))
+
+	var fib func(n int) int
+
+	fib = func(n int) int {
+		if n < 2 {
+			return n
+		}
+		return fib(n-1) + fib(n-2)
+	}
+
+	fmt.Println(fib(7))
 
 }
