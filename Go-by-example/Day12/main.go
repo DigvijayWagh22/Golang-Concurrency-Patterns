@@ -2,7 +2,6 @@ package main
 
 import (
 	"fmt"
-	"time"
 )
 
 func main() {
@@ -16,7 +15,15 @@ func main() {
 	}(messages)
 
 	fmt.Println(<-messages)
-	time.Sleep(time.Second)
 	fmt.Println(<-messages)
+
+	// buffered channels
+
+	msgCh := make(chan string, 2)
+	msgCh <- "buffered"
+	msgCh <- "channel"
+
+	fmt.Println(<-msgCh)
+	fmt.Println(<-msgCh)
 
 }
